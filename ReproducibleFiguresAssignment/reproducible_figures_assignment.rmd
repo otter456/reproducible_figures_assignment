@@ -73,6 +73,7 @@ penguins_clean <- penguins_raw %>%
   select(-starts_with("Delta")) %>%
   select(-Comments) %>%
   clean_names()
+
 #create a histogram 
 ggplot(penguins_clean, aes(x=body_mass_g))+
   geom_histogram(bins=10, fill="light yellow") +
@@ -84,7 +85,7 @@ ggplot(penguins_clean, aes(x=body_mass_g))+
 
 Although this figure is correct i.e., I have used a histogram to portray a sampling distribution with a continuous independent variable, it badly communicates the data in a number of ways:
 
-(1) The lack of colours to denote species or sex may be mislead because it gives no information as to how the distribution of penguin body mass is affected by confounding variables. This is necessary so that the reader does not assume mean body mass is ~3500g regardless of species/sex i.e., males and Adelie penguins make up the higher body masses! If this is not included, it can lead to incorrect interpretation of findings.
+(1) The lack of colours to denote species or sex may be mislead because it gives no information as to how the distribution of penguin body mass is affected by confounding variables. This is necessary so that the reader does not assume mean body mass is ~3500g is uniform regardless of species/sex i.e., males and Adelie penguins make up the higher body masses! If this is not included, it can lead to incorrect interpretation of findings.
 
 (2) The low number of bins i.e., the number of groups into which the data are divided, may also be misleading the reader about the underlying skew of the histogram. This is because the variability within the distribution is hidden by grouping/compressing lots of data together. Therefore, the number of bins should be increased (from 10 to 30) to more clearly show the shape of the distribution.
 
@@ -98,6 +99,8 @@ Although this figure is correct i.e., I have used a histogram to portray a sampl
 - [Achieving graphical excellence: Suggestions and methods for creating high-quality visual displays of experimental data](https://www.sciencedirect.com/science/article/pii/S0196064401750639){.uri}
 - [1,500 scientists lift the lid on reproducibility](https://www.nature.com/articles/533452a){.uri}
 - [Point of View: How open science helps researchers succeed](https://elifesciences.org/articles/16800){.uri}
+
+*these link can be accessed by clicking on them*
 
 ------------------------------------------------------------------------
 
@@ -123,6 +126,8 @@ I am going to use the Palmer Penguins data set to investigate if there is a corr
 - I will them create an exploratory scatter plot to visualize the Chinstrap penguin data.
 
 - After this I will use a statistical test and results figure to form a conclusion about my hypothesis and discuss the biological implications of this result. 
+
+NB// All the functions used in my code can be found in separate folders which can be accessed from my GitHub link in q3. 
 
 ### 1.1 Load the data
 
@@ -189,6 +194,7 @@ write.csv(penguins_filtered, "data/penguins_filtered.csv")
 #view the new column names of filtered data to check it has worked
 names(penguins_filtered)
 ```
+
 ### 3.2 Create an exploratory plot
 
 ```{r Data Exploration, echo=TRUE, message=FALSE, warning=FALSE}
@@ -202,6 +208,8 @@ culmendepth_bodymass_exploratory <- penguins_filtered %>%
 #print the exploratory figure
 culmendepth_bodymass_exploratory
 ```
+
+This exploratory plot suggests that there might be some positive relationship between body mass and culmen depth but it is hard to be sure as there is no regression line.
 
 ### 3.3 Save the exploratory plot
 
@@ -263,7 +271,7 @@ chinstrap_cor
 
 ### 5.1 Plot the results figure
 
-- The correlation coefficient (r) was found to be 0.604 (3 d.p.) which is a fairly strong positive correlation and this can be shown by adding a regression line to the scatter plot.
+- The correlation coefficient (r) was found to be 0.604 (3 d.p.) which is a fairly strong positive correlation and this can be shown by adding a regression line (with a gradient representative of 0.604) to the scatter plot.
 
 ```{r Plotting Results Figure, echo=TRUE, message=FALSE, warning=FALSE}
 #load the plotting function file from the functions folder
@@ -317,13 +325,13 @@ dev.off()
 
 *Upload your RProject you created for **Question 2** and any files and subfolders used to GitHub. Do not include any identifiers such as your name. Make sure your GitHub repo is public.*
 
-*GitHub link:*
+*GitHub link:* [https://github.com/otter456/reproducible_figures_assignment] 
 
 *You will be marked on your repo organisation and readability.*
 
 ### b) Share your repo with a partner, download, and try to run their data pipeline.
 
-*Partner's GitHub link:*
+*Partner's GitHub link:* [https://github.com/ReproducibleScienceAssessment/Reproducible_figures]
 
 *You **must** provide this so I can verify there is no plagiarism between you and your partner.*
 
@@ -331,15 +339,30 @@ dev.off()
 
 -   *What elements of your partner's code helped you to understand their data pipeline?*
 
+The hash-tagged comments within their chunks of code were helpful to help me understand exactly what they were doing and why. I also thought that the way in which they split up their chucks of code was clear. 
+
 -   *Did it run? Did you need to fix anything?*
+
+The only thing I needed to fix when running my partners code was getting it to knit to a pdf. To do this I hash-tagged the install.packages() lines of code as I already had these packages installed in my Rstudio. My partner also had two chunks of code both called 'Statistics' so I needed to change these to 'Statisics1' and 'Statistics2' for it to knit. The outputs of my partners code were fine and I was able to see all the plots. 
 
 -   *What suggestions would you make for improving their code to make it more understandable or reproducible, and why?*
 
--   *If you needed to alter your partner's figure using their code, do you think that would be easy or difficult, and why?*
+To make the code more reproducible, it would be helpful to have separate folders for cleaning, plotting etc. and in these folders R scripts could be included each containing the functions my partner used. This is helpful because each function has a sensible name and only does one thing so the person reading the code can still understand without seeing all the underlying detail in the main .rmd. 
+
+-   *If you needed to alter your partner's figure using their code, do you think that would be easy or difficult, and why*
+
+I think it would be quite easy for me to alter my partners figure using their code because they have used functions to break the code into more manageable chunks, that can be modified, while still showing whats going on. 
 
 ### d) Reflect on your own code based on your experience with your partner's code and their review of yours. (300-500 words)
 
 -   *What improvements did they suggest, and do you agree?*
 
+My partner suggested that it would be helpful to have the code for plotting figures in the main document, rather than in in separate folders. I do agree that this would make it easier to quickly make a connection between the plotting code and outputted graph, however, I think that using folders for functions makes the code clearer and less cluttered. The second suggestion my partner made was to reduce the explanation within the lines of code. Again, I agree that it would more clear to have the explanation in one chunk, however, for a less experienced user of R it might be helpful to see the explanation line by line so they can understand exactly what is going on. 
+
 -   *What did you learn about writing code for other people?*
 
+I have learnt that writing code for other people is a lot more difficult than writing code for yourself mainly because of having to explain things in the clearest way possible. However, this assignment taught me lots of things to help make my code as reproducible as possible. 
+
+Firstly, I now know how to use pipelines in my code to make it more succinct and readable. Secondly, I now know how to create a function and why it's important to put these functions into separate R scripts and collate them into a folder called functions. Similarly, a data folder can be used to store copies of the raw and clean data, this is important so that nothing is overwritten.
+
+Overall, I think one of the most useful things I have learnt about writing code for other people is that I can use GitHub to upload my code to a repository. This is helpful because it allows collaboration and changes to be tracked. This allows my code to be clear, consistent and understandable while also being open and sharing my work. These things are really important when making code for other people because it enhances reproducibility and replicability of  scientific research. 
